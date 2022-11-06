@@ -70,7 +70,7 @@ const RepositoryList = () => {
           stargazersCount={item.stargazersCount}
           ratingAverage={item.ratingAverage}
           reviewCount={item.reviewCount}
-          /* onPress={() => this._onPress(item)} */
+          ownerAvatarUrl={item.ownerAvatarUrl}
           onShowUnderlay={separators.highlight}
           onHideUnderlay={separators.unhighlight}
           index={index} />
