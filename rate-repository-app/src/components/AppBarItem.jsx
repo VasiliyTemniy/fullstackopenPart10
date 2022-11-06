@@ -1,11 +1,22 @@
-import { Pressable } from 'react-native';
+import { Pressable, StyleSheet } from 'react-native';
+import { Link } from 'react-router-native';
+import theme from '../theme';
 import Text from './Text';
 
-const AppBarItem = (props) => (
-  <Pressable onPress={props.onPress}>
-    <Text color={'textBright'} fontWeight={'bold'} >
-      {props.text}
-    </Text>
+const styles = StyleSheet.create({
+  appBarChildren: {
+    paddingHorizontal: theme.gaps.appBarItemGap,
+    paddingVertical: theme.gaps.appBarItemGap,
+  },
+});
+
+const AppBarItem = ({ path, text }) => (
+  <Pressable>
+    <Link to={path}>
+      <Text color={'textBright'} fontWeight={'bold'} style={styles.appBarChildren}>
+        {text}
+      </Text>
+    </Link>
   </Pressable>
 );
 
