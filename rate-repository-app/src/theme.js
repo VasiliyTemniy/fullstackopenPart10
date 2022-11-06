@@ -18,6 +18,10 @@ const theme = {
     normal: '400',
     bold: '700',
   },
+  gaps: {
+    repoItemGap: 6,
+    appBarItemGap: 20,
+  }
 };
 
 export default theme;

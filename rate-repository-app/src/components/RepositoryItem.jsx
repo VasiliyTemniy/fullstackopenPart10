@@ -3,8 +3,6 @@ import theme from '../theme';
 import Text from './Text';
 import RepoItemNumerics from './RepoItemNumerics';
 
-const gap = 6;
-
 const styles = StyleSheet.create({
   itemContainer: {
     padding: 20,
@@ -15,26 +13,21 @@ const styles = StyleSheet.create({
   mainInfoContainer: {
     display: 'flex',
     flexDirection: 'row',
-    gap: 10,
   },
   textContainer: {
     display: 'flex',
     justifyContent: 'space-around',
-    paddingVertical: gap / -2,
+    paddingVertical: theme.gaps.repoItemGap / -2,
     marginLeft: 15,
     marginBottom: 10,
   },
   textChildren: {
-    marginVertical: gap / 2,
+    marginVertical: theme.gaps.repoItemGap / 2,
   },  
   numericsContainer: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-around',
-  },
-  numericItemContainer: {
-    display: 'flex',
-    alignItems: 'center'
   },
   tagStyle: {
     alignSelf: 'flex-start',
@@ -42,7 +35,7 @@ const styles = StyleSheet.create({
     paddingVertical: 3,
     paddingHorizontal: 5,
     borderRadius: 5,
-    marginVertical: gap / 2,
+    marginVertical: theme.gaps.repoItemGap / 2,
   },
   logo: {
     width: 50,
