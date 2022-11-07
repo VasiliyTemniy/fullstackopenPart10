@@ -1,9 +1,9 @@
 import { View, StyleSheet } from 'react-native';
 import FormikTextInput from '../FormikTextInput';
 
-import Button from './Button';
+import Button from '../Button';
 
-import theme from '../theme';
+import theme from '../../theme';
 
 const styles = StyleSheet.create({
   container: {
