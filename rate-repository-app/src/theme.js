@@ -6,6 +6,10 @@ const theme = {
     primary: '#0366D6',
     menuBackground: '#25292C',
     mainBackground: '#E1E4E8',
+    containerBackground: '#FFFFFF',
+    inputBorderColor: '#C0C0C0',
+    inputActiveBorderColor: '#24292E',
+    buttonTouched: '#5BA8FD',
   },
   fontSizes: {
     body: 14,
@@ -21,6 +25,7 @@ const theme = {
   gaps: {
     repoItemGap: 6,
     appBarItemGap: 20,
+    formInputsGap: 10,
   }
 };
 
