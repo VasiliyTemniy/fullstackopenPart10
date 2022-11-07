@@ -9,6 +9,8 @@ const theme = {
     containerBackground: '#FFFFFF',
     inputBorderColor: '#C0C0C0',
     inputActiveBorderColor: '#24292E',
+    inputErrorBorderColor: '#D73A4A',
+    inputErrorTextColor: '#D73A4A',
     buttonTouched: '#5BA8FD',
   },
   fontSizes: {

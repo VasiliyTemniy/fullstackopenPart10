@@ -14,9 +14,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.containerBackground,
     elevation: 5,
   },
-  textInput: {
-    borderWidth: 1,
-    borderRadius: 5,
+  signinTextInput: {
     padding: 10,
     marginVertical: theme.gaps.formInputsGap / 2,
   },
@@ -25,8 +23,8 @@ const styles = StyleSheet.create({
 const SignInForm = ({ onSubmit }) => {
   return (
   <View style={styles.container}>
-    <FormikTextInput name="username" placeholder="Username" style={styles.textInput}/>
-    <FormikTextInput name="password" placeholder="Password" style={styles.textInput} secureTextEntry={true}/>
+    <FormikTextInput name="username" placeholder="Username" style={styles.signinTextInput}/>
+    <FormikTextInput name="password" placeholder="Password" style={styles.signinTextInput} secureTextEntry={true}/>
     <Button onPress={onSubmit} label={'Sign in'} />
   </View>
   );
