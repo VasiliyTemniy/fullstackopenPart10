@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
   itemContainer: {
     padding: 20,
     zIndex: 10,
-    backgroundColor: 'white',
+    backgroundColor: theme.colors.containerBackground,
     elevation: 5,
   },
   mainInfoContainer: {
