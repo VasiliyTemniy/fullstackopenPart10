@@ -10,13 +10,18 @@ const styles = StyleSheet.create({
   },
 });
 
-const AppBarItem = ({ path, text }) => (
-  <Pressable>
-    <Link to={path}>
-      <Text color={'textBright'} fontWeight={'bold'} style={styles.appBarChildren}>
+const AppBarItem = ({ path, text, onPress }) => (
+  <Pressable onPress={onPress}>
+    {path 
+    ? <Link to={path}>
+        <Text color={'textBright'} fontWeight={'bold'} style={styles.appBarChildren}>
+          {text}
+        </Text>
+      </Link>
+    : <Text color={'textBright'} fontWeight={'bold'} style={styles.appBarChildren}>
         {text}
       </Text>
-    </Link>
+    }
   </Pressable>
 );
 
