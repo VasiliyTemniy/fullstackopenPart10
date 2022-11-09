@@ -21,9 +21,6 @@ const styles = StyleSheet.create({
 
 const TextInput = ({ style, error, ...props }) => {
 
-  // I tried to use useRef, but its .current was always null
-  // so textInputRef.current.isFocused() did not work
-  // Tried to avoid using useState to make less component rendering
   const [focused, setFocused] = useState(false);
 
   const textInputStyle = [
