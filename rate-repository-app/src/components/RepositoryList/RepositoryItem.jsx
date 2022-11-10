@@ -48,7 +48,7 @@ const RepositoryItem = ({ fullName, description, language,
   forksCount, stargazersCount, ratingAverage, reviewCount, ownerAvatarUrl }) => {
 
     return (
-      <View style={styles.itemContainer}>
+      <View style={styles.itemContainer} testID="repositoryItem">
         <View style={styles.mainInfoContainer}>
           <Image style={styles.logo} source={{ uri: ownerAvatarUrl }}/>
           <View style={styles.textContainer}>

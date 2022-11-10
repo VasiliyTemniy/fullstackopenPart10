@@ -21,29 +21,9 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-const RepositoryList = () => {
-
-  const { repositories, error, loading } = useRepositories();
-
-  if (loading) return (
-    <View style={styles.container}>
-      <ActivityIndicator size="large" color={theme.colors.primary} style={styles.activityIndicator}/>
-    </View>
-  );
-
-  if (error) {
-    console.log('error: ', error);
-    return (
-      <View style={styles.container}>
-        <Text>
-          Please, reload the app.
-        </Text>
-      </View>
-    );
-  }
-
+export const RepositoryListContainer = ({ repositories }) => {
   const repositoryNodes = repositories
-    ? repositories.edges.map(edge => edge.node)
+    ? repositories.edges.map((edge) => edge.node)
     : [];
 
   return (
@@ -66,6 +46,30 @@ const RepositoryList = () => {
       )}
     />
   );
+};
+
+const RepositoryList = () => {
+
+  const { repositories, error, loading } = useRepositories();
+
+  if (loading) return (
+    <View style={styles.container}>
+      <ActivityIndicator size="large" color={theme.colors.primary} style={styles.activityIndicator}/>
+    </View>
+  );
+
+  if (error) {
+    console.log('error: ', error);
+    return (
+      <View style={styles.container}>
+        <Text>
+          Please, reload the app.
+        </Text>
+      </View>
+    );
+  }
+
+  return <RepositoryListContainer repositories={repositories} />;
 };
 
 export default RepositoryList;
