@@ -1,7 +1,10 @@
 import { View, Image, StyleSheet } from 'react-native';
-import theme from '../../theme';
-import Text from '../Text';
+
 import RepoItemNumerics from './RepoItemNumerics';
+import Button from '../Button';
+import Text from '../Text';
+
+import theme from '../../theme';
 
 const styles = StyleSheet.create({
   itemContainer: {
@@ -42,10 +45,14 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 5,
   },
+  button: {
+    marginTop: 20,
+  },
 });
 
 const RepositoryItem = ({ fullName, description, language,
-  forksCount, stargazersCount, ratingAverage, reviewCount, ownerAvatarUrl }) => {
+  forksCount, stargazersCount, ratingAverage, reviewCount,
+  ownerAvatarUrl, showItemButton = false, onPress }) => {
 
     return (
       <View style={styles.itemContainer} testID="repositoryItem">
@@ -65,6 +72,7 @@ const RepositoryItem = ({ fullName, description, language,
           <RepoItemNumerics label={'Reviews'} number={reviewCount}/>
           <RepoItemNumerics label={'Rating'} number={ratingAverage}/>
         </View>
+        {showItemButton && <Button onPress={onPress} label={'Open in GitHub'} style={styles.button}/>}
       </View>
     );
 

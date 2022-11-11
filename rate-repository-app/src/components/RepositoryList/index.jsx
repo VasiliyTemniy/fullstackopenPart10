@@ -1,8 +1,10 @@
-import useRepositories from '../../hooks/useRepositories';
 import { FlatList, View, StyleSheet, ActivityIndicator } from 'react-native';
+import { Link } from 'react-router-native';
 
 import RepositoryItem from './RepositoryItem';
 import Text from '../Text';
+
+import useRepositories from '../../hooks/useRepositories';
 
 import theme from '../../theme';
 
@@ -31,18 +33,20 @@ export const RepositoryListContainer = ({ repositories }) => {
       data={repositoryNodes}
       ItemSeparatorComponent={ItemSeparator}
       renderItem={({ item, index, separators }) => (
-        <RepositoryItem
-          fullName={item.fullName}
-          description={item.description}
-          language={item.language}
-          forksCount={item.forksCount}
-          stargazersCount={item.stargazersCount}
-          ratingAverage={item.ratingAverage}
-          reviewCount={item.reviewCount}
-          ownerAvatarUrl={item.ownerAvatarUrl}
-          onShowUnderlay={separators.highlight}
-          onHideUnderlay={separators.unhighlight}
-          index={index} />
+        <Link to={`/${item.id}`}>
+          <RepositoryItem
+            fullName={item.fullName}
+            description={item.description}
+            language={item.language}
+            forksCount={item.forksCount}
+            stargazersCount={item.stargazersCount}
+            ratingAverage={item.ratingAverage}
+            reviewCount={item.reviewCount}
+            ownerAvatarUrl={item.ownerAvatarUrl}
+            onShowUnderlay={separators.highlight}
+            onHideUnderlay={separators.unhighlight}
+            index={index} />
+        </Link>
       )}
     />
   );
