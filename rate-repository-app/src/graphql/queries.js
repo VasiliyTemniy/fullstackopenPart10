@@ -23,9 +23,21 @@ query Repositories {
 export const GET_REPO_DETAILS = gql`
 query RepoDetails($repoId: ID!) {
   repository(id: $repoId) {
-    id
-    fullName
     url
+    reviews {
+      edges {
+        node {
+          id
+          text
+          rating
+          createdAt
+          user {
+            id
+            username
+          }
+        }
+      }
+    }
   }
 }
 `;

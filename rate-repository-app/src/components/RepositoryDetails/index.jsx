@@ -1,9 +1,10 @@
-import { View, StyleSheet, ActivityIndicator } from 'react-native';
+import { FlatList, View, StyleSheet, ActivityIndicator } from 'react-native';
 import { useParams } from 'react-router-native';
 import { useApolloClient } from '@apollo/client';
 import { openURL } from 'expo-linking';
 
 import RepositoryItem from '../RepositoryList/RepositoryItem';
+import ReviewItem from './ReviewItem';
 import Text from '../Text';
 
 import useRepoDetails from '../../hooks/useRepoDetails';
@@ -13,6 +14,9 @@ import { GET_REPOSITORIES } from '../../graphql/queries';
 import theme from '../../theme';
 
 const styles = StyleSheet.create({
+  separator: {
+    height: 10,
+  },
   container: {
     flex: 1,
     justifyContent: "center",
@@ -21,6 +25,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   }
 });
+
+const ItemSeparator = () => <View style={styles.separator} />;
 
 const RepositoryDetails = () => {
   
@@ -46,22 +52,31 @@ const RepositoryDetails = () => {
     );
   }
 
+  const reviews = repoDetails
+  ? repoDetails.reviews.edges.map((edge) => edge.node)
+  : [];
+
   const { repositories } = client.readQuery({ query: GET_REPOSITORIES });
 
   const repository = repositories.edges.find(repo => repo.node.id === repoId).node;
 
   return (
-    <RepositoryItem
-      fullName={repository.fullName}
-      description={repository.description}
-      language={repository.language}
-      forksCount={repository.forksCount}
-      stargazersCount={repository.stargazersCount}
-      ratingAverage={repository.ratingAverage}
-      reviewCount={repository.reviewCount}
-      ownerAvatarUrl={repository.ownerAvatarUrl}
-      showItemButton={true}
-      onPress={() => openURL(repoDetails.url)}
+    <FlatList
+      data={reviews}
+      ItemSeparatorComponent={ItemSeparator}
+      renderItem={({ item }) => <ReviewItem review={item} />}
+      keyExtractor={({ id }) => id}
+      ListHeaderComponent={() =>
+        <>
+          <RepositoryItem
+            repository={repository}
+            showItemButton={true}
+            onPress={() => openURL(repoDetails.url)}
+          />
+          <ItemSeparator/>
+        </>
+      }
+      ListFooterComponent={ItemSeparator} // to make elevation work on last item
     />
   );
 };
