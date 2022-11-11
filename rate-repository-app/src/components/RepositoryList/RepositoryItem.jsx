@@ -52,27 +52,27 @@ const styles = StyleSheet.create({
 
 const RepositoryItem = ({ repository, showItemButton = false, onPress }) => {
 
-    return (
-      <View style={styles.itemContainer} testID="repositoryItem">
-        <View style={styles.mainInfoContainer}>
-          <Image style={styles.logo} source={{ uri: repository.ownerAvatarUrl }}/>
-          <View style={styles.textContainer}>
-            <Text fontWeight={'bold'} style={styles.textChildren}>{repository.fullName}</Text>
-            <Text color={'textSecondary'} style={styles.textChildren}>{repository.description}</Text>
-            <View style={styles.tagStyle}>
-              <Text color={'textBright'}>{repository.language}</Text>
-            </View>
+  return (
+    <View style={styles.itemContainer} testID="repositoryItem">
+      <View style={styles.mainInfoContainer}>
+        <Image style={styles.logo} source={{ uri: repository.ownerAvatarUrl }}/>
+        <View style={styles.textContainer}>
+          <Text fontWeight={'bold'} style={styles.textChildren}>{repository.fullName}</Text>
+          <Text color={'textSecondary'} style={styles.textChildren}>{repository.description}</Text>
+          <View style={styles.tagStyle}>
+            <Text color={'textBright'}>{repository.language}</Text>
           </View>
         </View>
-        <View style={styles.numericsContainer}>
-          <RepoItemNumerics label={'Stars'} number={repository.stargazersCount}/>
-          <RepoItemNumerics label={'Forks'} number={repository.forksCount}/>
-          <RepoItemNumerics label={'Reviews'} number={repository.reviewCount}/>
-          <RepoItemNumerics label={'Rating'} number={repository.ratingAverage}/>
-        </View>
-        {showItemButton && <Button onPress={onPress} label={'Open in GitHub'} style={styles.button}/>}
       </View>
-    );
+      <View style={styles.numericsContainer}>
+        <RepoItemNumerics label={'Stars'} number={repository.stargazersCount}/>
+        <RepoItemNumerics label={'Forks'} number={repository.forksCount}/>
+        <RepoItemNumerics label={'Reviews'} number={repository.reviewCount}/>
+        <RepoItemNumerics label={'Rating'} number={repository.ratingAverage}/>
+      </View>
+      {showItemButton && <Button onPress={onPress} label={'Open in GitHub'} style={styles.button}/>}
+    </View>
+  );
 
 };
 
