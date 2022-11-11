@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Button = ({ onPress, label }) => {
+const Button = ({ style, onPress, label }) => {
 
   const buttonStyle = ({ pressed }) => [
     {
@@ -23,7 +23,8 @@ const Button = ({ onPress, label }) => {
         ? theme.colors.buttonTouched
         : theme.colors.primary
     },
-    styles.button
+    styles.button,
+    style
   ]
 
   return (
