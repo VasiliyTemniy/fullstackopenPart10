@@ -1,4 +1,4 @@
-import { View, StyleSheet, ScrollView} from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import { useApolloClient } from '@apollo/client';
 
 import Constants from 'expo-constants';
