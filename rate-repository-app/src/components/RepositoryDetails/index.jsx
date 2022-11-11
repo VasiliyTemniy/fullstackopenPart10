@@ -51,20 +51,18 @@ const RepositoryDetails = () => {
   const repository = repositories.edges.find(repo => repo.node.id === repoId).node;
 
   return (
-    <>
-      <RepositoryItem
-        fullName={repository.fullName}
-        description={repository.description}
-        language={repository.language}
-        forksCount={repository.forksCount}
-        stargazersCount={repository.stargazersCount}
-        ratingAverage={repository.ratingAverage}
-        reviewCount={repository.reviewCount}
-        ownerAvatarUrl={repository.ownerAvatarUrl}
-        showItemButton={true}
-        onPress={() => openURL(repoDetails.url)}
-      />
-    </>
+    <RepositoryItem
+      fullName={repository.fullName}
+      description={repository.description}
+      language={repository.language}
+      forksCount={repository.forksCount}
+      stargazersCount={repository.stargazersCount}
+      ratingAverage={repository.ratingAverage}
+      reviewCount={repository.reviewCount}
+      ownerAvatarUrl={repository.ownerAvatarUrl}
+      showItemButton={true}
+      onPress={() => openURL(repoDetails.url)}
+    />
   );
 };
 
