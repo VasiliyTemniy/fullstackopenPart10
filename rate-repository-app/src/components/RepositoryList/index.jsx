@@ -32,13 +32,12 @@ export const RepositoryListContainer = ({ repositories }) => {
     <FlatList
       data={repositoryNodes}
       ItemSeparatorComponent={ItemSeparator}
-      renderItem={({ item, index, separators }) => (
+      keyExtractor={({ id }) => id}
+      renderItem={({ item }) => (
         <Link to={`/${item.id}`}>
           <RepositoryItem
             repository={item}
-            onShowUnderlay={separators.highlight}
-            onHideUnderlay={separators.unhighlight}
-            index={index} />
+          />
         </Link>
       )}
     />
