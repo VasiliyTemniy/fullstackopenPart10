@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     display: 'flex',
-    justifyContent: 'space-around',
+    flexShrink: 1,
     paddingVertical: theme.gaps.repoItemGap / -2,
     marginLeft: 15,
     marginBottom: 10,
