@@ -35,14 +35,7 @@ export const RepositoryListContainer = ({ repositories }) => {
       renderItem={({ item, index, separators }) => (
         <Link to={`/${item.id}`}>
           <RepositoryItem
-            fullName={item.fullName}
-            description={item.description}
-            language={item.language}
-            forksCount={item.forksCount}
-            stargazersCount={item.stargazersCount}
-            ratingAverage={item.ratingAverage}
-            reviewCount={item.reviewCount}
-            ownerAvatarUrl={item.ownerAvatarUrl}
+            repository={item}
             onShowUnderlay={separators.highlight}
             onHideUnderlay={separators.unhighlight}
             index={index} />
