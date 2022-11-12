@@ -1,26 +1,18 @@
-import { FlatList, View, StyleSheet, ActivityIndicator } from 'react-native';
+import { FlatList, View, StyleSheet } from 'react-native';
 import { useParams } from 'react-router-native';
 import { openURL } from 'expo-linking';
 
 import RepositoryItem from '../RepositoryList/RepositoryItem';
 import ReviewItem from './ReviewItem';
-import Text from '../Text';
+import LoadingIndicator from '../LoadingIndicator';
+import ErrorScreen from '../ErrorScreen';
 
 import useRepoDetails from '../../hooks/useRepoDetails';
-
-import theme from '../../theme';
 
 const styles = StyleSheet.create({
   separator: {
     height: 10,
   },
-  container: {
-    flex: 1,
-    justifyContent: "center",
-  },
-  activityIndicator: {
-    alignSelf: 'center',
-  }
 });
 
 const ItemSeparator = () => <View style={styles.separator} />;
@@ -31,22 +23,9 @@ const RepositoryDetails = () => {
 
   const { repoDetails, error, loading } = useRepoDetails(repoId);
 
-  if (loading) return (
-    <View style={styles.container}>
-      <ActivityIndicator size="large" color={theme.colors.primary} style={styles.activityIndicator}/>
-    </View>
-  );
+  if (loading) return <LoadingIndicator />;
 
-  if (error) {
-    console.log('error: ', error);
-    return (
-      <View style={styles.container}>
-        <Text>
-          Please, reload the app.
-        </Text>
-      </View>
-    );
-  }
+  if (error) return <ErrorScreen error={error} />;
 
   const reviews = repoDetails
   ? repoDetails.reviews.edges.map((edge) => edge.node)

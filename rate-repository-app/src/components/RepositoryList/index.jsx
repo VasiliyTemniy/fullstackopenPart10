@@ -1,24 +1,17 @@
-import { FlatList, View, StyleSheet, ActivityIndicator } from 'react-native';
+import { FlatList, View, StyleSheet } from 'react-native';
 import { Link } from 'react-router-native';
+import { Picker } from '@react-native-picker/picker';
 
 import RepositoryItem from './RepositoryItem';
-import Text from '../Text';
+import LoadingIndicator from '../LoadingIndicator';
+import ErrorScreen from '../ErrorScreen';
 
 import useRepositories from '../../hooks/useRepositories';
-
-import theme from '../../theme';
 
 const styles = StyleSheet.create({
   separator: {
     height: 10,
   },
-  container: {
-    flex: 1,
-    justifyContent: "center",
-  },
-  activityIndicator: {
-    alignSelf: 'center',
-  }
 });
 
 const ItemSeparator = () => <View style={styles.separator} />;
@@ -48,24 +41,16 @@ const RepositoryList = () => {
 
   const { repositories, error, loading } = useRepositories();
 
-  if (loading) return (
-    <View style={styles.container}>
-      <ActivityIndicator size="large" color={theme.colors.primary} style={styles.activityIndicator}/>
-    </View>
+  if (loading) return <LoadingIndicator />;
+
+  if (error) return <ErrorScreen error={error} />;
+
+  return (
+    <>
+      <Picker></Picker>
+      <RepositoryListContainer repositories={repositories} />
+    </>
   );
-
-  if (error) {
-    console.log('error: ', error);
-    return (
-      <View style={styles.container}>
-        <Text>
-          Please, reload the app.
-        </Text>
-      </View>
-    );
-  }
-
-  return <RepositoryListContainer repositories={repositories} />;
 };
 
 export default RepositoryList;
