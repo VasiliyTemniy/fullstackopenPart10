@@ -33,11 +33,9 @@ const initialValues = {
 const validationSchema = yup.object().shape({
   ownerName: yup
     .string()
-    .min(3, 'Username must be longer than 3 characters')
     .required('Repository owner name is required'),
   repositoryName: yup
     .string()
-    .min(3, 'Password must be longer than 3 characters')
     .required('Repository name is required'),
   rating: yup
     .number()
