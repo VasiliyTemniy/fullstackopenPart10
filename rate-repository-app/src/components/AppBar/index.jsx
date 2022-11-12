@@ -10,6 +10,7 @@ import Text from '../Text';
 import useAuthStorage from '../../hooks/useAuthStorage';
 
 import useMeInfo from '../../hooks/useMeInfo';
+import { useNavigate } from 'react-router-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -28,10 +29,12 @@ const AppBar = () => {
 
   const authStorage = useAuthStorage();
   const apolloClient = useApolloClient();
+  const navigate = useNavigate();
 
   const handleSignout = async () => {
     await authStorage.removeAccessToken();
     apolloClient.resetStore();
+    navigate("/");
   };
 
   if (loading) return null;
@@ -52,6 +55,7 @@ const AppBar = () => {
         {me && <AppBarItem text={'Create a review'} path='/review' />}
         {me && <AppBarItem text={'Sign out'} onPress={handleSignout} />}
         {!me && <AppBarItem text={'Sign in'} path='/signin' />}
+        {!me && <AppBarItem text={'Sign up'} path='/signup' />}
       </ScrollView>
     </View>
   );
