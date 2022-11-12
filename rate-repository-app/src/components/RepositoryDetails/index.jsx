@@ -1,6 +1,5 @@
 import { FlatList, View, StyleSheet, ActivityIndicator } from 'react-native';
 import { useParams } from 'react-router-native';
-import { useApolloClient } from '@apollo/client';
 import { openURL } from 'expo-linking';
 
 import RepositoryItem from '../RepositoryList/RepositoryItem';
@@ -8,8 +7,6 @@ import ReviewItem from './ReviewItem';
 import Text from '../Text';
 
 import useRepoDetails from '../../hooks/useRepoDetails';
-
-import { GET_REPOSITORIES } from '../../graphql/queries';
 
 import theme from '../../theme';
 
@@ -31,7 +28,6 @@ const ItemSeparator = () => <View style={styles.separator} />;
 const RepositoryDetails = () => {
   
   const { repoId } = useParams();
-  const client = useApolloClient();
 
   const { repoDetails, error, loading } = useRepoDetails(repoId);
 
@@ -56,10 +52,6 @@ const RepositoryDetails = () => {
   ? repoDetails.reviews.edges.map((edge) => edge.node)
   : [];
 
-  const { repositories } = client.readQuery({ query: GET_REPOSITORIES });
-
-  const repository = repositories.edges.find(repo => repo.node.id === repoId).node;
-
   return (
     <FlatList
       data={reviews}
@@ -69,7 +61,7 @@ const RepositoryDetails = () => {
       ListHeaderComponent={() =>
         <>
           <RepositoryItem
-            repository={repository}
+            repository={repoDetails}
             showItemButton={true}
             onPress={() => openURL(repoDetails.url)}
           />
