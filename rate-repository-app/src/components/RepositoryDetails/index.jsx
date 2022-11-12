@@ -17,19 +17,10 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-const RepositoryDetails = () => {
-  
-  const { repoId } = useParams();
-
-  const { repoDetails, error, loading } = useRepoDetails(repoId);
-
-  if (loading) return <LoadingIndicator />;
-
-  if (error) return <ErrorScreen error={error} />;
-
+export const RepositoryDetailsContainer = ({ repoDetails }) => {
   const reviews = repoDetails
-  ? repoDetails.reviews.edges.map((edge) => edge.node)
-  : [];
+    ? repoDetails.reviews.edges.map((edge) => edge.node)
+    : [];
 
   return (
     <FlatList
@@ -49,6 +40,21 @@ const RepositoryDetails = () => {
       }
       ListFooterComponent={ItemSeparator} // to make elevation work on last item
     />
+  );
+};
+
+const RepositoryDetails = () => {
+  
+  const { repoId } = useParams();
+
+  const { repoDetails, error, loading } = useRepoDetails(repoId);
+
+  if (loading) return <LoadingIndicator />;
+
+  if (error) return <ErrorScreen error={error} />;
+
+  return (
+    <RepositoryDetailsContainer repoDetails={repoDetails} />
   );
 };
 
