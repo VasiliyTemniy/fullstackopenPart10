@@ -3,6 +3,8 @@ import { SIGN_IN } from "../graphql/mutations";
 
 import useAuthStorage from '../hooks/useAuthStorage';
 
+import createAlert from "../utils/createAlert";
+
 const useSignIn = () => {
 
   const authStorage = useAuthStorage();
@@ -10,7 +12,8 @@ const useSignIn = () => {
 
   const [login, result] = useMutation(SIGN_IN, {
     onError: (error) => {
-      console.log(error.graphQLErrors[0].message, 'error')
+      console.log(error.graphQLErrors[0].message, 'error');
+      createAlert(error);
     },
   });
 
