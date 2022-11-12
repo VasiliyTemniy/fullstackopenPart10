@@ -1,15 +1,7 @@
-import { Alert } from "react-native";
 import { useMutation } from "@apollo/client";
 import { CREATE_REVIEW } from "../graphql/mutations";
 
-const createAlert = (e) =>
-  Alert.alert(
-    "Error",
-    `${e}`,
-    [
-      { text: "OK", onPress: () => console.log("OK Pressed") }
-    ]
-  );
+import createAlert from "../utils/createAlert";
 
 const useCreateReview = () => {
 
