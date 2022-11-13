@@ -1,12 +1,13 @@
+import { useState } from 'react';
 import { FlatList, View, StyleSheet } from 'react-native';
 import { Link } from 'react-router-native';
-import { Picker } from '@react-native-picker/picker';
 
 import RepositoryItem from './RepositoryItem';
 import LoadingIndicator from '../LoadingIndicator';
 import ErrorScreen from '../ErrorScreen';
 
 import useRepositories from '../../hooks/useRepositories';
+import SortDirectionPicker from './SortDirectionPicker';
 
 const styles = StyleSheet.create({
   separator: {
@@ -39,7 +40,17 @@ export const RepositoryListContainer = ({ repositories }) => {
 
 const RepositoryList = () => {
 
-  const { repositories, error, loading } = useRepositories();
+  const [ sortBy, setSortBy ] = useState("latest");
+
+  const orderBy = sortBy === "latest"
+    ? "CREATED_AT"
+    : "RATING_AVERAGE";
+
+  const orderDirection = sortBy === "lowest"
+    ? "ASC"
+    : "DESC";
+
+  const { repositories, error, loading } = useRepositories(orderBy, orderDirection);
 
   if (loading) return <LoadingIndicator />;
 
@@ -47,7 +58,7 @@ const RepositoryList = () => {
 
   return (
     <>
-      <Picker></Picker>
+      <SortDirectionPicker sortBy={sortBy} setSortBy={setSortBy} />
       <RepositoryListContainer repositories={repositories} />
     </>
   );
