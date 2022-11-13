@@ -58,10 +58,12 @@ const RepositoryItem = ({ repository, showItemButton = false, onPress }) => {
         <Image style={styles.logo} source={{ uri: repository.ownerAvatarUrl }}/>
         <View style={styles.textContainer}>
           <Text fontWeight={'bold'} style={styles.textChildren}>{repository.fullName}</Text>
-          <Text color={'textSecondary'} style={styles.textChildren}>{repository.description}</Text>
+          {repository.description &&
+          <Text color={'textSecondary'} style={styles.textChildren}>{repository.description}</Text>}
+          {repository.language && 
           <View style={styles.tagStyle}>
             <Text color={'textBright'}>{repository.language}</Text>
-          </View>
+          </View>}
         </View>
       </View>
       <View style={styles.numericsContainer}>
