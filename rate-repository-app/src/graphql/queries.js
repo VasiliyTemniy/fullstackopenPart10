@@ -66,6 +66,9 @@ query Me($first: Int, $after: String, $includeReviews: Boolean = false) {
       edges {
         node {
           repositoryId
+          repository {
+            fullName
+          }
           ...ReviewInfo
         }
         cursor
