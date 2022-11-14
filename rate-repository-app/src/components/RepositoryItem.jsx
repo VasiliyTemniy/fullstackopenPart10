@@ -1,10 +1,10 @@
 import { View, Image, StyleSheet } from 'react-native';
 
-import RepoItemNumerics from './RepoItemNumerics';
-import Button from '../Button';
-import Text from '../Text';
+import RepoItemNumerics from './RepositoryList/RepoItemNumerics';
+import Button from './Button';
+import Text from './Text';
 
-import theme from '../../theme';
+import theme from '../theme';
 
 const styles = StyleSheet.create({
   itemContainer: {
