@@ -1,11 +1,16 @@
 import { Alert } from "react-native";
 
-const createAlert = (e) =>
+const createAlert = (title, text, confirmLabel, handleConfirm) =>
   Alert.alert(
-    "Error",
-    `${e}`,
+    `${title}`,
+    `${text}`,
     [
-      { text: "OK", onPress: () => console.log("OK Pressed") }
+      {
+        text: "CANCEL",
+        onPress: () => console.log("Cancel Pressed"),
+        style: "cancel"
+      },
+      { text: `${confirmLabel}`, onPress: () => handleConfirm() }
     ]
   );
 
