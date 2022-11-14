@@ -50,6 +50,8 @@ export class RepositoryListContainer extends React.Component {
           </Link>
         )}
         ListHeaderComponent={this.renderHeader}
+        onEndReached={this.props.onEndReach}
+        onEndReachedThreshold={0.5}
       />
     );
   }
@@ -59,7 +61,7 @@ const RepositoryList = () => {
 
   const [ sortBy, setSortBy ] = useState("latest");
   const [ filter, setFilter ] = useState('');
-  const [ filterForUse ] = useDebounce(filter, 500);
+  const [ searchKeyword ] = useDebounce(filter, 500);
 
   const orderBy = sortBy === "latest"
     ? "CREATED_AT"
@@ -69,17 +71,18 @@ const RepositoryList = () => {
     ? "ASC"
     : "DESC";
 
-  const { repositories, error /* , loading */ } = useRepositories(orderBy, orderDirection, filterForUse);
+  const { repositories, error, fetchMore } = useRepositories({
+    orderBy,
+    orderDirection,
+    searchKeyword,
+    first: 8
+  });
 
-  //if (loading) return <LoadingIndicator />;  // I had to disable this to make 10.24 working without unmounting of 
-                                               // RepositoryListHeader. Another solution was to move Filter/Search and
-                                               // SortDirectionPicker out of RepositoryList on a new top layer component
-                                               // with "Animated" React Native component to make them disappear with scrolling
-                                               // this is sad that exercise restricts solution to be inside of
-                                               // "ListHeaderComponent" prop of FlatList.
-                                               // (qoute: "Put the text input component in the FlatList component's header.")
+  if (error) return <ErrorScreen error={error.message} />;
 
-  if (error) return <ErrorScreen error={error} />;
+  const onEndReach = () => {
+    fetchMore();
+  };
 
   return (
     <RepositoryListContainer
@@ -88,6 +91,7 @@ const RepositoryList = () => {
       setSortBy={setSortBy}
       filter={filter}
       setFilter={setFilter}
+      onEndReach={onEndReach}
     />
   );
 };

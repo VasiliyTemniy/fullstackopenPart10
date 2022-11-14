@@ -4,7 +4,6 @@ import { openURL } from 'expo-linking';
 
 import RepositoryItem from '../RepositoryList/RepositoryItem';
 import ReviewItem from './ReviewItem';
-import LoadingIndicator from '../LoadingIndicator';
 import ErrorScreen from '../ErrorScreen';
 
 import useRepoDetails from '../../hooks/useRepoDetails';
@@ -17,7 +16,7 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-export const RepositoryDetailsContainer = ({ repoDetails }) => {
+export const RepositoryDetailsContainer = ({ repoDetails, onEndReach }) => {
   const reviews = repoDetails
     ? repoDetails.reviews.edges.map((edge) => edge.node)
     : [];
@@ -38,7 +37,9 @@ export const RepositoryDetailsContainer = ({ repoDetails }) => {
           <ItemSeparator/>
         </>
       }
-      ListFooterComponent={ItemSeparator} // to make elevation work on last item
+      onEndReached={onEndReach}
+      onEndReachedThreshold={0.5}
+      ListFooterComponent={ItemSeparator}
     />
   );
 };
@@ -47,14 +48,16 @@ const RepositoryDetails = () => {
   
   const { repoId } = useParams();
 
-  const { repoDetails, error, loading } = useRepoDetails(repoId);
+  const { repoDetails, error, fetchMore } = useRepoDetails({ repoId, first: 4 });
 
-  if (loading) return <LoadingIndicator />;
+  if (error) return <ErrorScreen error={error.message} />;
 
-  if (error) return <ErrorScreen error={error} />;
+  const onEndReach = () => {
+    fetchMore();
+  };
 
   return (
-    <RepositoryDetailsContainer repoDetails={repoDetails} />
+    <RepositoryDetailsContainer repoDetails={repoDetails} onEndReach={onEndReach} />
   );
 };
 
