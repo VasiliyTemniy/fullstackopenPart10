@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     padding: 14,
     borderRadius: 5,
-    marginVertical: theme.gaps.formInputsGap / 2,
+    marginVertical: 5,
   },
   buttonLabel: {
     alignSelf: 'center',
