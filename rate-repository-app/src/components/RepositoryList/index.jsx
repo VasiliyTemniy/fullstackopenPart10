@@ -3,8 +3,7 @@ import { useDebounce } from 'use-debounce';
 import { FlatList, View, StyleSheet } from 'react-native';
 import { Link } from 'react-router-native';
 
-import RepositoryItem from './RepositoryItem';
-//import LoadingIndicator from '../LoadingIndicator';
+import RepositoryItem from '../RepositoryItem';
 import ErrorScreen from '../ErrorScreen';
 import RepositoryListHeader from './RepositoryListHeader';
 
@@ -52,6 +51,7 @@ export class RepositoryListContainer extends React.Component {
         ListHeaderComponent={this.renderHeader}
         onEndReached={this.props.onEndReach}
         onEndReachedThreshold={0.5}
+        ListFooterComponent={ItemSeparator}
       />
     );
   }

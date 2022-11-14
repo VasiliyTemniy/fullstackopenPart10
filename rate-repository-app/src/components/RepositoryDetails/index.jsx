@@ -2,8 +2,8 @@ import { FlatList, View, StyleSheet } from 'react-native';
 import { useParams } from 'react-router-native';
 import { openURL } from 'expo-linking';
 
-import RepositoryItem from '../RepositoryList/RepositoryItem';
-import ReviewItem from './ReviewItem';
+import RepositoryItem from '../RepositoryItem';
+import ReviewItem from '../ReviewItem';
 import ErrorScreen from '../ErrorScreen';
 
 import useRepoDetails from '../../hooks/useRepoDetails';
@@ -48,11 +48,13 @@ const RepositoryDetails = () => {
   
   const { repoId } = useParams();
 
-  const { repoDetails, error, fetchMore } = useRepoDetails({ repoId, first: 4 });
+  const { repoDetails, error, loading, fetchMore } = useRepoDetails({ repoId, first: 4 });
+
+  if (loading) return null;
 
   if (error) return <ErrorScreen error={error.message} />;
 
-  const onEndReach = () => {
+  const onEndReach = () => { 
     fetchMore();
   };
 
