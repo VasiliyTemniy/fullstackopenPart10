@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client';
-import { REPOSITORY_INFO, REVIEW_INFO } from './fragments';
+import { PAGE_INFO, REPOSITORY_INFO, REVIEW_INFO } from './fragments';
 
 export const GET_REPOSITORIES = gql`
 query Repositories(
@@ -24,13 +24,12 @@ query Repositories(
       cursor
     }
     pageInfo {
-      endCursor
-      startCursor
-      hasNextPage
+      ...PageInfoFragment
     }
   }
 }
 ${REPOSITORY_INFO}
+${PAGE_INFO}
 `;
 
 export const GET_REPO_DETAILS = gql`
@@ -47,22 +46,35 @@ query RepoDetails($repoId: ID!, $first: Int, $after: String) {
         cursor
       }
       pageInfo {
-        endCursor
-        startCursor
-        hasNextPage
+        ...PageInfoFragment
       }
     }
   }
 }
 ${REPOSITORY_INFO}
 ${REVIEW_INFO}
+${PAGE_INFO}
 `;
 
-export const ME_QUERY = gql`
-query Me {
+export const GET_CURRENT_USER = gql`
+query Me($first: Int, $after: String, $includeReviews: Boolean = false) {
   me {
     id
     username
+    reviews(first: $first, after: $after) @include(if: $includeReviews) {
+      totalCount
+      edges {
+        node {
+          ...ReviewInfo
+        }
+        cursor
+      }
+      pageInfo {
+        ...PageInfoFragment
+      }
+    }
   }
 }
+${REVIEW_INFO}
+${PAGE_INFO}
 `;

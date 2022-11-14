@@ -53,6 +53,7 @@ const AppBar = () => {
       <ScrollView horizontal>
         <AppBarItem text={'Repositories'} path='/'/>
         {me && <AppBarItem text={'Create a review'} path='/review' />}
+        {me && <AppBarItem text={'My reviews'} path='/myreviews' />}
         {me && <AppBarItem text={'Sign out'} onPress={handleSignout} />}
         {!me && <AppBarItem text={'Sign in'} path='/signin' />}
         {!me && <AppBarItem text={'Sign up'} path='/signup' />}
