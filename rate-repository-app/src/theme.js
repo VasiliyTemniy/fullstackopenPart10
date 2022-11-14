@@ -14,6 +14,7 @@ const theme = {
     inputErrorBorderColor: '#D73A4A',
     inputErrorTextColor: '#D73A4A',
     buttonTouched: '#5BA8FD',
+    deleteButton: '#D4384E',
   },
   fontSizes: {
     body: 14,
@@ -32,6 +33,7 @@ const theme = {
   },
   gaps: {
     repoItemGap: 6,
+    reviewItemGap: 6,
     appBarItemGap: 20,
     formInputsGap: 10,
   }
