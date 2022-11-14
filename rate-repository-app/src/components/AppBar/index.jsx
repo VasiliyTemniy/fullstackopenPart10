@@ -1,16 +1,17 @@
 import { View, StyleSheet, ScrollView } from 'react-native';
 import { useApolloClient } from '@apollo/client';
+import { useNavigate } from 'react-router-native';
 
 import Constants from 'expo-constants';
 
 import theme from '../../theme';
+
 import AppBarItem from './AppBarItem';
-import Text from '../Text';
+import ErrorScreen from '../ErrorScreen';
 
 import useAuthStorage from '../../hooks/useAuthStorage';
 
 import useMeInfo from '../../hooks/useMeInfo';
-import { useNavigate } from 'react-router-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -39,14 +40,7 @@ const AppBar = () => {
 
   if (loading) return null;
 
-  if (error) {
-    console.log('error: ', error);
-    return (
-      <Text>
-        Please, reload the app.
-      </Text>
-    );
-  }
+  if (error) return <ErrorScreen error={error.message} />;
 
   return (
     <View style={styles.container}>
