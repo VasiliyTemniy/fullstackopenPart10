@@ -12,7 +12,7 @@ const useSignUp = () => {
   const [createUser, result] = useMutation(CREATE_USER, {
     onError: (error) => {
       console.log(error.graphQLErrors[0].message, 'error');
-      createAlert(error);
+      createAlert('Error', error, 'OK', null);
     },
   });
 

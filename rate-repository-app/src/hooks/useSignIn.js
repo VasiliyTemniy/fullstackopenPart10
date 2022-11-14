@@ -13,7 +13,7 @@ const useSignIn = () => {
   const [login, result] = useMutation(SIGN_IN, {
     onError: (error) => {
       console.log(error.graphQLErrors[0].message, 'error');
-      createAlert(error);
+      createAlert('Error', error, 'OK', null);
     },
   });
 
