@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
 });
 
 
-const ReviewItem = ({ review }) => {
+const ReviewItem = ({ review, myReviewsPage = false }) => {
 
   const date = new Date(review.createdAt);
   const dateString = 
@@ -52,7 +52,10 @@ const ReviewItem = ({ review }) => {
       </View>
       <View style={styles.textContainer}>
         <Text fontWeight={'bold'}>
-          {review.user.username}
+          {myReviewsPage
+            ? review.repositoryId
+            : review.user.username
+          }
         </Text>
         <Text color={'textSecondary'}>
           {dateString}

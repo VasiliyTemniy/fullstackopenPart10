@@ -65,6 +65,7 @@ query Me($first: Int, $after: String, $includeReviews: Boolean = false) {
       totalCount
       edges {
         node {
+          repositoryId
           ...ReviewInfo
         }
         cursor

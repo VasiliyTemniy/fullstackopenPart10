@@ -22,7 +22,7 @@ export const MyReviewsContainer = ({ reviews, onEndReach }) => {
     <FlatList
       data={reviewNodes}
       ItemSeparatorComponent={ItemSeparator}
-      renderItem={({ item }) => <ReviewItem review={item} />}
+      renderItem={({ item }) => <ReviewItem review={item} myReviewsPage={true} />}
       keyExtractor={({ id }) => id}
       onEndReached={onEndReach}
       onEndReachedThreshold={0.5}
